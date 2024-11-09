@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from './Components/Navbar/Navbar';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -11,6 +12,8 @@ function Register() {
   };
 
   return (
+    <div>
+      <Navbar></Navbar>
     <div className="auth-container">
       <h2>Register</h2>
       <form onSubmit={handleRegister} className="auth-form">
@@ -37,6 +40,7 @@ function Register() {
         />
         <button type="submit">Register</button>
       </form>
+    </div>
     </div>
   );
 }

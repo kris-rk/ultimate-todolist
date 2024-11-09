@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from './Components/Navbar/Navbar';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,8 @@ function Login() {
   };
 
   return (
+    <div>
+      <Navbar></Navbar>
     <div className="auth-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin} className="auth-form">
@@ -29,6 +32,7 @@ function Login() {
         />
         <button type="submit">Login</button>
       </form>
+    </div>
     </div>
   );
 }
