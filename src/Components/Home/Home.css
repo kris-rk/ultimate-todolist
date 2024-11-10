@@ -1,0 +1,49 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+.button-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.button-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+
+.button-label{
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+
+.home-button{ 
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    width: 200px;
+    border-radius: 5px;
+}
+
+.home-button.primary {
+    background-color: black;
+    margin-bottom: 50px;
+}

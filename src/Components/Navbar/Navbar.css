@@ -131,3 +131,21 @@
     }
   }
   
+
+
+  .navbar {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #000000;
+  }
+
+  .navbar:not(.home-navbar){
+    justify-content: space-between;
+  }
+
+  .home-logo img {
+    width: 120px;
+    height: auto;
+  }

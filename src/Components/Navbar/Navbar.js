@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
 import './Navbar.css'; 
 import logo from './logo.png';
+import { useLocation } from 'react-router-dom';
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+
+
+  const isHome = location.pathname === '/';
   return (
-    <header>
-      <a className="logo" href="/">
+    <header className={`navbar ${isHome ? 'home-navbar' : ''}`}>
+      <a className={`logo ${isHome ? 'home-logo' : ''}`}href="/">
         <img src={logo} alt="ultimate-logo" />
       </a>
       <nav>
-        <ul className="nav__links">
+        {!isHome && (
+          <ul className="nav__links">
           <li><a href="/Login">Login</a></li>
           <li><a href="/Register">Register</a></li>
-          
-        </ul>
+          </ul>
+        )}; 
+        
       </nav>
       
-
       
     </header>
   );
