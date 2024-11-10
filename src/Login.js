@@ -12,7 +12,7 @@ function Login() {
 
   return (
     <div>
-      <Navbar></Navbar>
+    <Navbar></Navbar>
     <div className="auth-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin} className="auth-form">

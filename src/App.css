@@ -6,6 +6,7 @@ body {
   height: 100vh;
   background-color: #f3f4f6;
   margin: 0;
+  padding-top: 200px;
 }
 
 .auth-container {
@@ -57,4 +58,66 @@ body {
 
 .auth-form button:hover {
   background-color: #357ab8;
+}
+
+.add-item-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.add-item-container h2 {
+  color: #333;
+}
+
+.add-item-form label {
+  display: block;
+  margin: 1rem 0 0.25rem;
+  color: #666;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.add-item-form input,
+.add-item-form textarea,
+.add-item-form select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-item-form button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-item-form button[type="button"] {
+  background-color: #d9534f; 
+  color: #fff;
+  margin-right: 0.5rem;
+}
+
+.add-item-form button[type="button"]:hover {
+  background-color: #c9302c;
+}
+
+.add-item-form button[type="submit"] {
+  background-color: #5cb85c; 
+  color: #fff;
+}
+
+.add-item-form button[type="submit"]:hover {
+  background-color: #4cae4c;
 }
