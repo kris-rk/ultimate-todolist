@@ -3,19 +3,24 @@ import {useNavigate } from 'react-router-dom'
 
 function UserView() {
 
+    // navigation for buttons
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const handleAddClick = () => {
         navigate('/add_item');
+    };
+
+    const handleViewClick = () => {
+        navigate('/view_items');
     };
 
     return (        
         <div>
             <Navbar></Navbar>
             <div className="user-container">
-                <button>View Task</button>
+                <button onClick={handleViewClick}>View Task</button>
 
-                <button onClick={handleClick}>Add Task</button>
+                <button onClick={handleAddClick}>Add Task</button>
             </div>
         </div>
         

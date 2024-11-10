@@ -6,6 +6,7 @@ import Login from './Login'
 import Register from './Register'
 import AddItem from './AddItem'
 import UserView from './UserView'
+import ViewItems from './ViewItems'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/add_item" element={<AddItem/>} />
           <Route path="/user_home" element={<UserView/>} />
+          <Route path="/view_items" element={<ViewItems/>} />
         </Routes>
       </div>
     </Router>
