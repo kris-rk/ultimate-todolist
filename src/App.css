@@ -140,3 +140,9 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.item {
+  display: flex;
+  margin-bottom: 8px;
+  gap: 10px;
+}
