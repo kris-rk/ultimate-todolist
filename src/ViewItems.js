@@ -16,7 +16,7 @@ function ViewItems() {
         {
             id: 2,
             name: 'Meeting at School',
-            description: 'The decription of this',
+            description: 'The decription of this is suuuuuuuuuuuuuuuper long all the time',
             end_date: '1/1/2024',
             priority: 'high',
             completed: false
@@ -46,17 +46,17 @@ function ViewItems() {
     }
 
     return (
-        <div>
+        <div className="item-container">
             <Navbar></Navbar>
-            <div className="item">
-                <p> </p>
+            <div className="item-top">
+                <p>  </p>
                 <p>Title</p>
                 <p>Description</p>
                 <p> End Date </p>
                 <p>Priority</p>
             </div>
             {tasks.map(task => (
-                <ToDoItem
+                <ToDoItem 
                 key={task.id}
                 task={task}
                 deleteTask={deleteTask}
