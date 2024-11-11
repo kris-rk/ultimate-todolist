@@ -177,6 +177,7 @@ body {
 }
 
 .item-container button {
+  height: 20px;
   padding: 5px;
   background-color: black;
   color: #fff;
