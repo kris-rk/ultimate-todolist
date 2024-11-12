@@ -1,4 +1,4 @@
-import Navbar from "./Components/Navbar/Navbar";
+import NavbarLoggedIn from "./Components/NavbarLoggedIn/NavbarLoggedIn";
 import ToDoItem from "./Components/ToDoItem/ToDoItem"
 import { useState } from 'react'
 
@@ -47,7 +47,7 @@ function ViewItems() {
 
     return (
         <div className="item-container">
-            <Navbar></Navbar>
+            <NavbarLoggedIn></NavbarLoggedIn>
             <div className="item-top">
                 <p>  </p>
                 <p>Title</p>

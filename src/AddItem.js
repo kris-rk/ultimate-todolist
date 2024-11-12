@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from './Components/Navbar/Navbar';
+import NavbarLoggedIn from "./Components/NavbarLoggedIn/NavbarLoggedIn";
 
 
 const AddItem = () => {
@@ -47,7 +47,7 @@ const AddItem = () => {
 
   return (
     <div className="add-item-container">
-    <Navbar></Navbar>
+    <NavbarLoggedIn></NavbarLoggedIn>
       <h2>Add New Task</h2>
       <form className="add-item-form" onSubmit={handleSubmit}>
         <div>

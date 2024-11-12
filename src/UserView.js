@@ -1,4 +1,4 @@
-import Navbar from "./Components/Navbar/Navbar";
+import NavbarLoggedIn from "./Components/NavbarLoggedIn/NavbarLoggedIn";
 import {useNavigate } from 'react-router-dom'
 
 function UserView() {
@@ -16,7 +16,7 @@ function UserView() {
 
     return (        
         <div>
-            <Navbar></Navbar>
+            <NavbarLoggedIn></NavbarLoggedIn>
             <div className="user-container">
                 <button onClick={handleViewClick}>View Task</button>
 
