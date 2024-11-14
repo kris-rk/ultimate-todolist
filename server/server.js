@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const express = require('express');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const cors = require('cors'); 
@@ -10,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const uri = "mongodb+srv://webprojectdbemail:YinkTfON31NwxG0k@webprojectcluster.tjary.mongodb.net/?retryWrites=true&w=majority&appName=webprojectcluster";
+const uri = "mongodb+srv://webprojectdbemail:YinkTfON31NwxG0k@webprojectcluster.tjary.mongodb.net/ultimatetodolistDB?retryWrites=true&w=majority&appName=webprojectcluster";
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -39,3 +42,38 @@ app.get('/ping', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+//registration endpoint
+app.post('/register', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    //connect to the db
+    const db = client.db('ultimatetodolistDB');
+    const usersCollection = db.collection('users');
+
+    //check if user with the same email already exists
+    const existingUser = await usersCollection.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    //hash the password w bcrypt
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    //create the new user document
+    const newUser = {
+      email,
+      password: hashedPassword,
+    };
+
+    //insert the new user into the users collection
+    await usersCollection.insertOne(newUser);
+
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Registration failed' });
+  }
+});
+
