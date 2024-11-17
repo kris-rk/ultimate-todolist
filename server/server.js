@@ -77,3 +77,34 @@ app.post('/register', async (req, res) => {
   }
 });
 
+//login endpoint
+app.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const db = client.db('ultimatetodolistDB');
+    const usersCollection = db.collection('users');
+
+    //find the user by email
+    const user = await usersCollection.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    //compare the provided password with the hashed password in the database
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    //generate a JWT - valid for 2 hours
+    const token = jwt.sign({ email: user.email }, 'secret_jwt_secret', { expiresIn: '2h' });
+
+    res.status(200).json({ message: 'Login successful', token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Login failed' });
+  }
+});
+
+
