@@ -107,4 +107,36 @@ app.post('/login', async (req, res) => {
   }
 });
 
+//addtask endpoint
+app.post('/addTask', async (req, res) => {
+  try {
+    const { name, desc, end, priority, reminder } = req.body;
+
+    //connect to the db
+    const db = client.db('ultimatetodolistDB');
+    const tasksCollection = db.collection('tasks');
+
+    
+
+
+
+    //task doc
+    const newTask = {
+      name,
+      desc,
+      end, 
+      priority, 
+      reminder
+    };
+
+    //insert the new user into the users collection
+    await tasksCollection.insertOne(newTask);
+
+    res.status(201).json({ message: 'Task added successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to add Task:(' });
+  }
+});
+
 

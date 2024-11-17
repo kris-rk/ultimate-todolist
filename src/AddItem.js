@@ -8,6 +8,7 @@ const AddItem = () => {
   const [endDate, setEndDate] = useState('');
   const [priority, setPriority] = useState('');
   const [reminder, setReminder] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,11 +33,34 @@ const AddItem = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); 
+    
     const newItem = { taskName, description, endDate, priority, reminder };
-    console.log('New Item:', newItem); 
-
+    const name = taskName;
+    const desc = description;
+    const end = endDate;
+    //console.log('New Item:', newItem); 
+    try {
+      const response = await fetch('http://localhost:2000/addTask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, desc, end, priority, reminder }),
+      });
+      const data = await response.json();
+      
+      //display success or error message based on response
+      if (response.ok) {
+        window.alert('added task successfully!');
+        setMessage(data.message);
+      } else {
+        setMessage(data.message || ' Failed to add task');
+      }
+    } catch (error) {
+      setMessage('Failed to add task');
+    }
     //clear form inputs
     setTaskName('');
     setDescription('');
@@ -110,6 +134,7 @@ const AddItem = () => {
           <button type="submit">Add Task</button>
         </div>
       </form>
+      
     </div>
   );
 };
