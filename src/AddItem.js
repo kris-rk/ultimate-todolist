@@ -35,6 +35,12 @@ const AddItem = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
+
+    const token = localStorage.getItem('token');
+    if(!token){
+      setMessage('User is not authorized');
+      return;
+    }
     
     const newItem = { taskName, description, endDate, priority, reminder };
     const name = taskName;
@@ -46,6 +52,7 @@ const AddItem = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name, desc, end, priority, reminder }),
       });

@@ -98,7 +98,7 @@ app.post('/login', async (req, res) => {
     }
 
     //generate a JWT - valid for 2 hours
-    const token = jwt.sign({ email: user.email }, 'secret_jwt_secret', { expiresIn: '2h' });
+    const token = jwt.sign({ userId: user._id, email: user.email }, 'secret_jwt_secret', { expiresIn: '2h' });
 
     res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
@@ -110,13 +110,23 @@ app.post('/login', async (req, res) => {
 //addtask endpoint
 app.post('/addTask', async (req, res) => {
   try {
+
+    const token = req.headers.authorization?.split(' ')[1];
+    console.log(token); 
+    if(!token){
+      return req.status(401).json({message: ' Authentication token is missing'});
+    }
+
+    const decode = jwt.verify(token, 'secret_jwt_secret' );
+    console.log('Decoded Token', decode);
+    const userId = decode.userId;
+    console.log('extracted userID', userId);
     const { name, desc, end, priority, reminder } = req.body;
 
     //connect to the db
     const db = client.db('ultimatetodolistDB');
     const tasksCollection = db.collection('tasks');
 
-    
 
 
 
@@ -126,7 +136,8 @@ app.post('/addTask', async (req, res) => {
       desc,
       end, 
       priority, 
-      reminder
+      reminder, 
+      createdBy: userId
     };
 
     //insert the new user into the users collection
