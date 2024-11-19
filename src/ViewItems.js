@@ -1,35 +1,57 @@
 import NavbarLoggedIn from "./Components/NavbarLoggedIn/NavbarLoggedIn";
 import ToDoItem from "./Components/ToDoItem/ToDoItem"
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 
 function ViewItems() {
 
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            name: 'Doctor Appointment',
-            description: 'The decription of this',
-            end_date: '1/1/2024',
-            priority: 'high',
-            completed: false
-        },
-        {
-            id: 2,
-            name: 'Meeting at School',
-            description: 'The decription of this is suuuuuuuuuuuuuuuper long all the time',
-            end_date: '1/1/2024',
-            priority: 'high',
-            completed: false
-        },
-        {
-            id: 3,
-            name: 'Project Due',
-            description: 'The decription of this',
-            end_date: '1/10/2024',
-            priority: 'high',
-            completed: false
-        },
-    ]);
+    const [tasks, setTasks] = useState([]);
+    const {message, setMessage} = useState('');
+    
+    useEffect(() =>{
+        const fetchTasks = async () =>{
+            const token = localStorage.getItem('token');
+            if(!token){
+                setMessage("User is not authenticated. redirecting to login...");
+                setTimeout(() =>{
+                    window.location.href = '/login';
+
+                }, 2000);
+                return;
+            }
+
+
+            try{
+                const response = await fetch('http://localhost:2000/getUserTasks', {
+                    method: 'GET', 
+                    headers: { 
+                        Authorization: `Bearer ${token}`, 
+                    }, 
+                });
+        
+        
+                if(response.ok){
+                    const data = await response.json();
+                    setTasks(data);
+                } else {
+                    const errorData = await response.json();
+                    setTasks(errorData.message || 'Failed to fetch tasks.');
+                }
+
+
+            } catch(error) {
+                console.error('Error Fetching tasks:  ', error); 
+                setMessage('Failed to fetch tasks.');            
+            }
+
+        };
+
+        fetchTasks();
+
+        
+    }, []);
+
+
+    
 
     function deleteTask(id) {
         setTasks(tasks.filter(task => task.id !== id))
@@ -64,6 +86,7 @@ function ViewItems() {
                 />
             ))}
         </div>
+        
     )
     
 }
