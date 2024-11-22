@@ -19,7 +19,7 @@ function ToDoItem({ task, deleteTask, toggleCompleted}) {
             <p>{task.end_date}</p>
             <p>{task.priority}</p>
             <button onClick={handleEdit}>Edit</button>
-            <button onClick={deleteTask}>Delete</button>
+            <button onClick={() => deleteTask(task._id)}>Delete</button>
             </div>
         </div>
 
