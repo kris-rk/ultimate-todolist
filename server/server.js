@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const express = require('express');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors'); 
 
 const app = express();
@@ -177,3 +177,33 @@ app.get('/getUserTasks', async (req, res) => {
     res.status(500).json({message: 'Failed to fetch tasks.'});
   }
 })
+
+app.delete('/deleteTask/:id', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({ message: 'Authentication token is missing' });
+    }
+
+    const decode = jwt.verify(token, 'secret_jwt_secret');
+    const userId = decode.userId;
+    const taskId = req.params.id;
+
+    const db = client.db('ultimatetodolistDB');
+    const tasksCollection = db.collection('tasks');
+
+    // Ensure the task belongs to the authenticated user
+    const result = await tasksCollection.deleteOne({ _id: new ObjectId(taskId), createdBy: userId });
+
+    if (result.deletedCount === 1) {
+      res.status(200).json({ message: 'Task deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Task not found or unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    res.status(500).json({ message: 'Failed to delete the task' });
+  }
+});
+

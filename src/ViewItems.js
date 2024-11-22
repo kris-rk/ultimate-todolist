@@ -5,7 +5,7 @@ import { useState, useEffect} from 'react'
 function ViewItems() {
 
     const [tasks, setTasks] = useState([]);
-    const {message, setMessage} = useState('');
+    const [message, setMessage] = useState('');
     
     useEffect(() =>{
         const fetchTasks = async () =>{
@@ -53,9 +53,31 @@ function ViewItems() {
 
     
 
-    function deleteTask(id) {
-        setTasks(tasks.filter(task => task.id !== id))
+    // delete task function
+    async function deleteTask(id) {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://localhost:2000/deleteTask/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+
+            if (response.ok) {
+                setTasks(tasks.filter(task => task._id !== id));
+                setMessage('Task deleted successfully.');
+            } else {
+                const errorData = await response.json();
+                setMessage(errorData.mesaage || 'Failed to delete task');
+            }
+        } catch (error) {
+            console.error('Error deleting task: ', error);
+            setMessage('Failed to delete the task');
+        }
     }
+
 
     function toggleCompleted(id) {
         setTasks(tasks.map(task => {
