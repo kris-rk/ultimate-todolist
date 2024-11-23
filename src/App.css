@@ -1,12 +1,10 @@
 body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f3f4f6;
+  background: white;
+  min-height: 100vh;
   margin: 0;
-  padding-top: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .auth-container {
@@ -47,7 +45,7 @@ body {
 .auth-form button {
   margin-top: 1.5rem;
   padding: 0.75rem;
-  background-color: #4a90e2;
+  background-color: #BA0C2F;
   color: #fff;
   font-size: 1rem;
   border: none;
@@ -57,29 +55,45 @@ body {
 }
 
 .auth-form button:hover {
-  background-color: #357ab8;
+  background-color: #BA0C2F;
 }
+
 
 .add-item-container {
   width: 100%;
-  max-width: 500px;
+  max-width: 800px; 
   padding: 2rem;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  text-align: center;
+  text-align: left; 
   margin-top: 20px;
 }
 
 .add-item-container h2 {
   color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-.add-item-form label {
+
+.add-item-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; 
+  justify-content: space-between; 
+}
+
+
+.add-item-form .form-group {
+  flex: 1 1 calc(50% - 1rem); 
+  min-width: 300px; 
+}
+
+.add-item-form .form-group label {
   display: block;
-  margin: 1rem 0 0.25rem;
+  margin-bottom: 0.5rem;
   color: #666;
-  text-align: left;
   font-size: 0.9rem;
 }
 
@@ -91,11 +105,16 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
-  margin-bottom: 1rem;
+}
+
+.add-item-form .button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 
 .add-item-form button {
-  padding: 0.75rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
   border: none;
   border-radius: 4px;
@@ -104,22 +123,22 @@ body {
 }
 
 .add-item-form button[type="button"] {
-  background-color: #d9534f; 
+  background-color: #dc3545;
   color: #fff;
   margin-right: 0.5rem;
 }
 
 .add-item-form button[type="button"]:hover {
-  background-color: #c9302c;
+  background-color: #c82333;
 }
 
 .add-item-form button[type="submit"] {
-  background-color: #5cb85c; 
+  background-color: #28a745; 
   color: #fff;
 }
 
 .add-item-form button[type="submit"]:hover {
-  background-color: #4cae4c;
+  background-color: #218838;
 }
 
 .user-container {
@@ -127,63 +146,169 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 500px;
+  gap: 100px; 
+  margin-top: 100px; 
 }
 
 .user-container button {
-  padding: 2rem;
-  background-color: black;
-  color: #fff;
-  font-size: 1rem;
+  padding: 1.5rem 2rem; 
+  background-color: #BA0C2F; 
+  color: #f1faee; 
+  font-size: 1.2rem; 
+  font-weight: bold; 
   border: none;
-  border-radius: 4px;
+  border-radius: 8px; 
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.2s ease, background-color 0.3s ease; 
 }
 
-.item {
-  display: flex;
-  margin-bottom: 8px;
-  gap: 10px;
-  width: 100%;
-  max-width: 500px;
-  padding: 2rem;
+.user-container button:hover {
+  background-color: #e02222; 
+  transform: translateY(-5px);
+}
+
+.item-container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
   background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  text-align: center;
-  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 .item-top {
-  display: flex;
-  margin-bottom: 8px;
-  margin-left: 40px;
-  
-  gap: 30px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 3fr 2fr 2fr 2fr 2fr;
+  font-weight: bold;
+  padding: 10px 0;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
 }
 
-
-
-.item-container {
-  width: 100%;
-  max-width: 1000px;
-  padding: 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+.item {
+  display: grid;
+  grid-template-columns: 1fr 2fr 3fr 2fr 2fr 2fr 2fr;
+  align-items: center;
+  padding: 15px 10px;
+  border-bottom: 1px solid #ddd;
   text-align: center;
+  font-size: 14px;
+}
+
+.item input[type="checkbox"] {
+  margin: 0 auto;
+}
+
+.item p {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item button {
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px;
+}
+
+.item button:hover {
+  background-color: #BA0C2F;
+}
+
+.item button:nth-child(6) {
+  background-color: #28a745;
+}
+
+.item button:nth-child(6):hover {
+  background-color: #218838;
+}
+
+.item button:nth-child(7) {
+  background-color: #dc3545;
+}
+
+.item button:nth-child(7):hover {
+  background-color: #c82333;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-content input,
+.modal-content select {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
   margin-top: 20px;
 }
 
-.item-container button {
-  height: 20px;
-  padding: 5px;
-  background-color: black;
-  color: #fff;
-  font-size: 10px;
+.modal-buttons button {
+  padding: 10px 20px;
+  font-size: 14px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
+
+.modal-buttons button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #218838;
+}
+
+.modal-buttons button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #c82333;
+}
+
+.add-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 500px;
+}
+
+

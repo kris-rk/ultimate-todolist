@@ -63,8 +63,6 @@ function ViewItems() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
-
             if (response.ok) {
                 setTasks(tasks.filter(task => task._id !== id));
                 setMessage('Task deleted successfully.');
@@ -78,10 +76,40 @@ function ViewItems() {
         }
     }
 
+    //edit task function 
+    async function editTask(id, updatedTask) {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://localhost:2000/editTask/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(updatedTask),
+            });
+    
+            if (response.ok) {
+                const updatedTasks = tasks.map(task => 
+                    task._id === id ? { ...task, ...updatedTask } : task
+                );
+                setTasks(updatedTasks);
+                setMessage('Task updated successfully.');
+            } else {
+                const errorData = await response.json();
+                setMessage(errorData.message || 'Failed to update task');
+            }
+        } catch (error) {
+            console.error('Error editing task:', error);
+            setMessage('Failed to update the task');
+        }
+    }
+    
+
 
     function toggleCompleted(id) {
         setTasks(tasks.map(task => {
-            if (task.id === id) {
+            if (task._id === id) {
                 return {...task, completed: !task.completed};
             } else {
                 return task;
@@ -91,25 +119,29 @@ function ViewItems() {
 
     return (
         <div className="item-container">
-            <NavbarLoggedIn></NavbarLoggedIn>
+            <NavbarLoggedIn />
             <div className="item-top">
-                <p>  </p>
+                <p>Completed</p>
                 <p>Title</p>
                 <p>Description</p>
-                <p> End Date </p>
+                <p>End Date</p>
                 <p>Priority</p>
+                <p>Edit</p>
+                <p>Delete</p>
             </div>
             {tasks.map(task => (
-                <ToDoItem 
-                key={task.id}
-                task={task}
-                deleteTask={deleteTask}
-                toggleCompleted={toggleCompleted}
+                <ToDoItem
+                    key={task._id}
+                    task={task}
+                    deleteTask={deleteTask}
+                    toggleCompleted={toggleCompleted}
+                    editTask={editTask}
                 />
             ))}
         </div>
-        
-    )
+    );
+    
+    
     
 }
 

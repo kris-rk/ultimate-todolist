@@ -46,27 +46,9 @@
   }
   
   .nav__links li a:hover {
-    color: #0088a9;
+    color: #BA0C2F;
   }
-  
-  .cta {
-    padding: 9px 25px;
-    background-color: rgba(0, 136, 169, 1);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease 0s;
-  }
-  
-  .cta:hover {
-    background-color: rgba(0, 136, 169, 0.8);
-  }
-  
-  
-  .menu {
-    display: none;
-  }
-  
+
   .overlay {
     height: 100%;
     width: 0;

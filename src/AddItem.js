@@ -128,7 +128,7 @@ const AddItem = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="add-buttons-container">
           <button type="button" onClick={() => {
             setTaskName('');
             setDescription('');
@@ -136,7 +136,7 @@ const AddItem = () => {
             setPriority('');
             setReminder('');
           }}>
-            Cancel
+            Clear Task
           </button>
           <button type="submit">Add Task</button>
         </div>

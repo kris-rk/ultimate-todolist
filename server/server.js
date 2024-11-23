@@ -127,9 +127,6 @@ app.post('/addTask', async (req, res) => {
     const db = client.db('ultimatetodolistDB');
     const tasksCollection = db.collection('tasks');
 
-
-
-
     //task doc
     const newTask = {
       name,
@@ -150,7 +147,7 @@ app.post('/addTask', async (req, res) => {
   }
 });
 
-
+//get user tasks endpoint
 app.get('/getUserTasks', async (req, res) => {
   try{
     const token = req.headers.authorization?.split(' ')[1];
@@ -178,6 +175,7 @@ app.get('/getUserTasks', async (req, res) => {
   }
 })
 
+//delete endpoint
 app.delete('/deleteTask/:id', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
@@ -206,4 +204,46 @@ app.delete('/deleteTask/:id', async (req, res) => {
     res.status(500).json({ message: 'Failed to delete the task' });
   }
 });
+
+//edit task endpoint
+app.put('/editTask/:id', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+      return res.status(401).json({ message: 'Authentication token is missing' });
+    }
+
+    const decoded = jwt.verify(token, 'secret_jwt_secret');
+    const userId = decoded.userId;
+    const taskId = req.params.id;
+
+    const { name, desc, end, priority } = req.body;
+
+    const db = client.db('ultimatetodolistDB');
+    const tasksCollection = db.collection('tasks');
+
+    //ensure the task belongs to the authenticated user
+    const result = await tasksCollection.updateOne(
+      { _id: new ObjectId(taskId), createdBy: userId },
+      {
+        $set: {
+          name,
+          desc,
+          end,
+          priority,
+        },
+      }
+    );
+
+    if (result.matchedCount === 1) {
+      res.status(200).json({ message: 'Task updated successfully' });
+    } else {
+      res.status(404).json({ message: 'Task not found or unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error editing task:', error);
+    res.status(500).json({ message: 'Failed to edit the task' });
+  }
+});
+
 

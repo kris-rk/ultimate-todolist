@@ -18,7 +18,7 @@ function UserView() {
         <div>
             <NavbarLoggedIn></NavbarLoggedIn>
             <div className="user-container">
-                <button onClick={handleViewClick}>View Task</button>
+                <button onClick={handleViewClick}>View Tasks</button>
 
                 <button onClick={handleAddClick}>Add Task</button>
             </div>

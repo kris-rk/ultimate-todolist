@@ -16,12 +16,13 @@ function Navbar() {
   const isHome = location.pathname === '/';
   return (
     <header className={`navbar ${isHome ? 'home-navbar' : ''}`}>
-      <a className={`logo ${isHome ? 'home-logo' : ''}`}href="/">
+      <a className={`logo ${isHome ? 'home-logo' : ''}`}href="/user_home">
         <img src={logo} alt="ultimate-logo" />
       </a>
       <nav>
         {!isHome && (
           <ul className="nav__links">
+          <li><a href="/user_home">Home</a></li>
           <li><a href="/">Log Out</a></li>
           </ul>
         )}; 
