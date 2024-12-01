@@ -34,6 +34,13 @@ function EditModal({ task, onClose, onSave }) {
                     placeholder="desc"
                 />
                 <input
+                    type="url"
+                    name="imageURL"
+                    value={updatedTask.imageURL}
+                    onChange={handleInputChange}
+                    placeholder="Image URL"                
+                />
+                <input
                     type="date"
                     name="end" 
                     value={updatedTask.end} 
