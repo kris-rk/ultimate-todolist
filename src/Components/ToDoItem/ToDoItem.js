@@ -28,6 +28,14 @@ function ToDoItem({ task, deleteTask, toggleCompleted, editTask }) {
                 checked={task.completed}
                 onChange={() => toggleCompleted(task._id)}
             />
+            <div className="todo-item-image">
+                {task.imageURL ? (
+                    <img src = {task.imageURL} alt = "Task" style={{ width: "50px", height: "50px", objectFit: "cover", borderRadius: "5px" }}/>
+                ): (
+                    <span>No Image</span>
+                )}
+
+            </div>
             <p>{task.name}</p>
             <p>{task.desc}</p>
             <p>{formatDate(task.end)}</p>

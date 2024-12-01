@@ -180,7 +180,7 @@ body {
 
 .item-top {
   display: grid;
-  grid-template-columns: 1fr 2fr 3fr 2fr 2fr 2fr 2fr;
+  grid-template-columns: 3fr 3fr 3fr 6fr 9fr 3fr 4fr 4fr;
   font-weight: bold;
   padding: 10px 0;
   border-bottom: 2px solid #ddd;
@@ -189,7 +189,7 @@ body {
 
 .item {
   display: grid;
-  grid-template-columns: 1fr 2fr 3fr 2fr 2fr 2fr 2fr;
+  grid-template-columns: 3fr 3fr 3fr 6fr 9fr 3fr 4fr 4fr;
   align-items: center;
   padding: 15px 10px;
   border-bottom: 1px solid #ddd;
@@ -222,19 +222,19 @@ body {
   background-color: #BA0C2F;
 }
 
-.item button:nth-child(6) {
+.item button:nth-child(7) {
   background-color: #28a745;
 }
 
-.item button:nth-child(6):hover {
+.item button:nth-child(7):hover {
   background-color: #218838;
 }
 
-.item button:nth-child(7) {
-  background-color: #dc3545;
+.item button:nth-child(8) {
+  background-color: #dc3535;
 }
 
-.item button:nth-child(7):hover {
+.item button:nth-child(8):hover {
   background-color: #c82333;
 }
 

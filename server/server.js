@@ -121,7 +121,7 @@ app.post('/addTask', async (req, res) => {
     console.log('Decoded Token', decode);
     const userId = decode.userId;
     console.log('extracted userID', userId);
-    const { name, desc, end, priority, reminder } = req.body;
+    const { name, desc, end, priority, reminder, imageURL } = req.body;
 
     //connect to the db
     const db = client.db('ultimatetodolistDB');
@@ -134,6 +134,7 @@ app.post('/addTask', async (req, res) => {
       end, 
       priority, 
       reminder, 
+      imageURL,
       createdBy: userId
     };
 

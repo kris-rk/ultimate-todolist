@@ -8,6 +8,7 @@ const AddItem = () => {
   const [endDate, setEndDate] = useState('');
   const [priority, setPriority] = useState('');
   const [reminder, setReminder] = useState('');
+  const [imageURL, setImageURL] = useState('');
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
@@ -28,6 +29,9 @@ const AddItem = () => {
       case 'reminder':
         setReminder(value);
         break;
+      case 'imageURL':
+        setImageURL(value);
+        break; 
       default:
         break;
     }
@@ -42,7 +46,7 @@ const AddItem = () => {
       return;
     }
     
-    const newItem = { taskName, description, endDate, priority, reminder };
+    const newItem = { taskName, description, endDate, priority, reminder, imageURL };
     const name = taskName;
     const desc = description;
     const end = endDate;
@@ -54,7 +58,7 @@ const AddItem = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ name, desc, end, priority, reminder }),
+        body: JSON.stringify({ name, desc, end, priority, reminder, imageURL}),
       });
       const data = await response.json();
       
@@ -74,6 +78,7 @@ const AddItem = () => {
     setEndDate('');
     setPriority('');
     setReminder('');
+    setImageURL('');
   };
 
   return (
@@ -128,6 +133,16 @@ const AddItem = () => {
             onChange={handleChange}
           />
         </div>
+        <div>
+          <label>Image (URL): </label>
+          <input
+            type="url"
+            name="imageURL"
+            value={imageURL}
+            onChange={handleChange}
+            placeholder="Enter image URL"
+          />
+        </div>
         <div className="add-buttons-container">
           <button type="button" onClick={() => {
             setTaskName('');
@@ -135,6 +150,7 @@ const AddItem = () => {
             setEndDate('');
             setPriority('');
             setReminder('');
+            setImageURL('');
           }}>
             Clear Task
           </button>

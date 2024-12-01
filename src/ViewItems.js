@@ -122,6 +122,7 @@ function ViewItems() {
             <NavbarLoggedIn />
             <div className="item-top">
                 <p>Completed</p>
+                <p>Image</p>
                 <p>Title</p>
                 <p>Description</p>
                 <p>End Date</p>
